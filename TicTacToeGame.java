@@ -14,14 +14,14 @@ public class TicTacToeGame {
             };
 
             if (new Random().nextBoolean()) {
-                computersTurn(gameTable);
-                showChangedGameBoard(gameTable);
+                computerMakeMove(gameTable);
+                printChangedGameBoard(gameTable);
             }
             System.out.println("Use the following mapping table to specify a cell using numbers from 1 to 9:");
-            showGameBoard();
+            printGameBoard();
             while (true) {
-                playersTurn(gameTable);
-                showChangedGameBoard(gameTable);
+                playerMakeMove(gameTable);
+                printChangedGameBoard(gameTable);
                 if (isPlayerWin(gameTable)) {
                     System.out.println("YOU WIN!");
                     break;
@@ -30,8 +30,8 @@ public class TicTacToeGame {
                     System.out.println("DRAW!");
                     break;
                 }
-                computersTurn(gameTable);
-                showChangedGameBoard(gameTable);
+                computerMakeMove(gameTable);
+                printChangedGameBoard(gameTable);
                 if (isComputerWin(gameTable)) {
                     System.out.println("COMPUTER WIN!");
                     break;
@@ -44,16 +44,16 @@ public class TicTacToeGame {
             System.out.println("GAME OVER");
         }
 
-        private static void showGameBoard() {
+        private static void printGameBoard() {
             char[][] gameTable = {
                     {'7', '8', '9'},
                     {'4', '5', '6'},
                     {'1', '2', '3'}
             };
-            showChangedGameBoard(gameTable);
+            printChangedGameBoard(gameTable);
         }
 
-        private static void showChangedGameBoard(char[][] gameTable) {
+        private static void printChangedGameBoard(char[][] gameTable) {
             System.out.println("-------------");
             System.out.println("| " + gameTable[0][0] + " | " + gameTable[0][1] + " | " + gameTable[0][2] + " |");
             System.out.println("-------------");
@@ -63,13 +63,13 @@ public class TicTacToeGame {
             System.out.println("-------------");
         }
 
-        private static void playersTurn(char[][] gameTable) {
+        private static void playerMakeMove(char[][] gameTable) {
             while (true) {
                 System.out.println("Please type number between 1 and 9:");
                 String string = new Scanner(System.in).nextLine();
                 if (string.length() == 1) {
                     char number = string.charAt(0);
-                    int[] element = getCellFromPlayersNumber(number);
+                    int[] element = getCellFromPlayerNumber(number);
                     if (number <= '0' || number > '9') {
                         System.out.println("Wrong number!");
                         continue;
@@ -85,7 +85,7 @@ public class TicTacToeGame {
 
         }
 
-        private static int[] getCellFromPlayersNumber(char number) {
+        private static int[] getCellFromPlayerNumber(char number) {
             int count = 0;
             int[] element = new int[2];
             outerLoop:
@@ -102,7 +102,7 @@ public class TicTacToeGame {
             return element;
         }
 
-        private static void computersTurn(char[][] gameTable) {
+        private static void computerMakeMove(char[][] gameTable) {
             Random random = new Random();
             while (true) {
                 int row = random.nextInt(3);
